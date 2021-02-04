@@ -1,4 +1,7 @@
 # MOSIM Meta
+
+![mosim](https://mosim.eu/____impro/1/onewebmedia/MOSIM%20Logo%20white%20background%20150.png?etag=%221b8a-5c57fd19%22&sourceContentType=image%2Fpng&ignoreAspectRatio&resize=150%2B84&extract=0%2B7%2B149%2B59)
+
 ## Intended Usage
 This project contains supporting files for the MOSIM framework. 
 It is a meta repository, the fundamental repository to combine the [MOSIM Core](https://github.com/Daimler/MOSIM_Core), [MOSIM Services](https://github.com/Daimler/MOSIM_Services) and [MOSIM Tools](https://github.com/Daimler/MOSIM_Tools) repositories. 
