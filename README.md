@@ -1,13 +1,19 @@
-<!-- SPDX-License-Identifier: MIT -->
-# My Project
-
+# MOSIM Meta
 ## Intended Usage
+This project contains supporting files for the MOSIM framework. 
+It is a meta repository, the fundamental repository to combine the [MOSIM Core](https://github.com/Daimler/MOSIM_Core), [MOSIM Services](https://github.com/Daimler/MOSIM_Services) and [MOSIM Tools](https://github.com/Daimler/MOSIM_Tools) repositories. 
 
-⚠️ //TODO// Describe your example! Eg: This project is made for cooking the best Tiramisu. It works best with high quality ingredients and the best tools. Please describe your project as accurately and concisely as possible to help others understand your use case.
+For more information on the MOSIM project, please consider the [MOSIM Core](https://github.com/Daimler/MOSIM_Core) repository and its documentation. 
 
 ## Installation
 
-⚠️ //TODO// Add your information and describe how the project can be used.
+In order to clone this repository propperly, please install [meta git](https://github.com/mateodelnorte/meta). 
+Afterwards, you can clone all repositories with
+```
+meta git clone git@github.com:Daimler/MOSIM.git
+```
+
+Afterwards, you can deploy the framework using the `deploy.bat` script. 
 
 ## Contributing
 
