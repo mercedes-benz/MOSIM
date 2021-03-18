@@ -98,7 +98,7 @@ REM Copy MMIUnity artifacts to UnityPathPlanning
 cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity\build .\Services\UnityPathPlanning\UnityPathPlanningService\Assets\Plugins
 
 REM Copy MMIUnityTarget engine to UnityDemo
-cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity.TargetEngine\MMIUnity.TargetEngine\build .\Demos\Assets\MMI\Plugins
+REM cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity.TargetEngine\MMIUnity.TargetEngine\build .\Demos\Assets\MMI\Plugins
 
 REM Build Services
 
