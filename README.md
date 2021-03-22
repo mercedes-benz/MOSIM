@@ -15,7 +15,7 @@ Afterwards, you can clone all repositories with
 ```
 meta git clone git@github.com:Daimler/MOSIM.git
 ```
-
+Make sure that Microsoft Visual Studio and Unity is installed and change the path names in `deploy.bat` accordingly.
 Afterwards, you can deploy the framework using the `deploy.bat` script. 
 
 ## Contributing
