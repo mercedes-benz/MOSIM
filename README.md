@@ -10,12 +10,13 @@ For more information on the MOSIM project, please consider the [MOSIM Core](http
 
 ## Installation
 
-In order to clone this repository propperly, please install [meta git](https://github.com/mateodelnorte/meta). 
+In order to clone this repository propperly, please install [meta git](https://github.com/mateodelnorte/meta).
 Afterwards, you can clone all repositories with
 ```
 meta git clone git@github.com:Daimler/MOSIM.git
 ```
-Make sure that Microsoft Visual Studio and Unity is installed and change the path names in `deploy.bat` accordingly.
+Make sure that Microsoft Visual Studio and Unity is installed and change the path names in `deploy.bat` accordingly. 
+Check [Compling the MOSIM framework from scratch](https://git.hb.dfki.de/mosim/mosim_core/-/wikis/01_Tutorials/CompileFramework) if you experience any problems.
 
 Afterwards, you can deploy the framework using the `deploy.bat` script. 
 
