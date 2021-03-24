@@ -15,6 +15,10 @@ if not defined DEVENV (
   exit /b 1
 ) else (
   ECHO DEVENV defined as: "%DEVENV%"
+  if not exist "%DEVENV%" (
+  ECHO Visual Studio does not seem to be installed or path name in deploy_variables.bat is wrong.
+  exit /b 2
+  )
 )
 
 if not defined UNITY2018_4_1 (
@@ -24,6 +28,10 @@ if not defined UNITY2018_4_1 (
   exit /b 1
 ) else (
   ECHO UNITY2018_4_1 defined as: "%UNITY2018_4_1%"
+  if not exist "%UNITY2018_4_1%" (
+  ECHO Unity does not seem to be installed or path name in deploy_variables.bat is wrong.
+  exit /b 2
+  )
 )
 
 if not defined UNITY2019_18_1 (
@@ -34,6 +42,10 @@ if not defined UNITY2019_18_1 (
   exit /b 1
 ) else (
   ECHO UNITY2019_18_1 defined as: "%UNITY2019_18_1%"
+  if not exist "%UNITY2019_18_1%" (
+  ECHO Unity does not seem to be installed or path name in deploy_variables.bat is wrong.
+  exit /b 2
+  )
 )
 
 IF EXIST build (
