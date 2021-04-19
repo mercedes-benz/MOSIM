@@ -14,6 +14,11 @@ if not defined DEVENV (
   exit /b 1
 ) else (
   ECHO DEVENV defined as: "%DEVENV%"
+  if not exist "%DEVENV%" (
+    ECHO Visual Studio does not seem to be installed or path name in deploy_variables.bat is wrong.
+    exit /b 2
+  )
+
 )
 
 
@@ -39,4 +44,5 @@ cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity\build .\Servic
 REM Copy MMIUnityTarget engine to UnityDemo
 cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity.TargetEngine\MMIUnity.TargetEngine\build .\Demos\Assets\MMI\Plugins
 
+cmd /c xcopy /S/Y/Q  .\Core\Framework\EngineSupport\Unity\MMIUnity\build .\Tools\MMUGenerator\Assets\MMUGenerator\Dependencies
 

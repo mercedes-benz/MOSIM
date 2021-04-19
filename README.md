@@ -19,7 +19,7 @@ Make sure that Microsoft Visual Studio and Unity is installed and change the pat
 
 Afterwards, you can deploy the framework using the `deploy.bat` script.
 
-Check [Compling the MOSIM framework from scratch](https://git.hb.dfki.de/mosim/mosim_core/-/wikis/01_Tutorials/CompileFramework) if you experience any problems.
+Check [Compling the MOSIM framework from scratch](https://github.com/Daimler/mosim_core/wiki/CompileFramework) if you experience any problems.
 
 ## Contributing
 

@@ -3,5 +3,6 @@
     "Core": "https://github.com/Daimler/MOSIM_Core.git",
     "Services": "https://github.com/Daimler/MOSIM_Services.git",
     "Tools": "https://github.com/Daimler/MOSIM_Tools.git"
+    "Demos": "https://github.com/Daimler/MOSIM_Demos.git"
   }
 }
