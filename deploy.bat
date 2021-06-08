@@ -11,6 +11,8 @@ call .\deploy_vs.bat
 
 call .\deploy_unity.bat
 
+call .\remove_double_mmus.bat
+
 REM the link currently does not yet work. 
 REM RD build\
 REM 
