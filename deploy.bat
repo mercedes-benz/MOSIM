@@ -7,6 +7,10 @@ REM This is a deploy script to auto-generate the framework, including launcher, 
 
 call deploy_variables.bat
 
+cd Core
+call .\distribute_unity.bat
+cd ..
+
 call .\deploy_vs.bat
 
 call .\deploy_unity.bat
