@@ -7,9 +7,28 @@ REM This is a deploy script to auto-generate the framework, including launcher, 
 
 call deploy_variables.bat
 
+REM Distribute Unity dlls if the environment variable is set for mixed artefacts (e.g. MMUs). 
+if defined UNITY2018_4_1 (
+  if exist "%UNITY2018_4_1%" (
+    cd Core
+	call .\distribute_unity.bat
+	cd ..
+  )
+)
+if defined UNITY2019_18_1 (
+  if exist "%UNITY2019_18_1%" (
+    cd Core
+	call .\distribute_unity.bat
+	cd ..
+  )
+)
+
+
 call .\deploy_vs.bat
 
 call .\deploy_unity.bat
+
+call .\remove_double_mmus.bat
 
 REM the link currently does not yet work. 
 REM RD build\

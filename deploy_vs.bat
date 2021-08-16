@@ -104,4 +104,4 @@ COPY Scripts\defaultSettings.json .\build\Environment\Launcher\settings.json
 
 ECHO [92mSuccessfully deployed Visual studio dependencies of the Framework to the build folder. After copying to the target, consider running the "enableFirewall" script to setup firewall access rights for all executables in the framework. [0m
 
-pause
+REM pause

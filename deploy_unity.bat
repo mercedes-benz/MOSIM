@@ -59,6 +59,11 @@ REM Copy core artifacts to services:
 
     REM Copy MMIUnityTarget engine to UnityDemo
     cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity.TargetEngine\MMIUnity.TargetEngine\build .\Demos\Assets\MMI\Plugins
+	
+REM Copy core artifacts to Tools>
+	
+	REM Copy MMIUnity to SkeletonTesting
+	cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity\build .\Tools\SkeletonTesting\Assets\Plugins
 
 REM Build Services
 
@@ -72,4 +77,4 @@ REM Todo: write deployment script for unityPathPlanning
 
 ECHO [92mSuccessfully deployed Unity Dependencies of the Framework to the build folder. After copying to the target, consider running the "enableFirewall" script to setup firewall access rights for all executables in the framework. [0m
 
-pause
+REM pause
