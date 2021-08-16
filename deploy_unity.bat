@@ -55,12 +55,12 @@ REM Core
 REM Copy core artifacts to services:
 
     REM Copy MMIUnity artifacts to UnityPathPlanning
-    cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity\build .\Services\UnityPathPlanning\UnityPathPlanningService\Assets\Plugins
+    cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity\build\* .\Services\UnityPathPlanning\UnityPathPlanningService\Assets\Plugins
 
     REM Copy MMIUnityTarget engine to UnityDemo
-    cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity.TargetEngine\MMIUnity.TargetEngine\build .\Demos\Assets\MMI\Plugins
-	
-REM Copy core artifacts to Tools>
+    cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity.TargetEngine\MMIUnity.TargetEngine\build\* .\Demos\Unity\Assets\MMI\Plugins
+
+REM Copy core artifacts to Tools
 	
 	REM Copy MMIUnity to SkeletonTesting
 	cmd /c xcopy /S/Y/Q .\Core\Framework\EngineSupport\Unity\MMIUnity\build .\Tools\SkeletonTesting\Assets\Plugins
