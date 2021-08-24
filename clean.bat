@@ -13,7 +13,10 @@ if not defined DEVENV (
   pause
   exit /b 1
 ) else (
-  ECHO DEVENV defined as: "%DEVENV%"
+  if not exist "%DEVENV%" (
+    ECHO Visual Studio does not seem to be installed at "%DEVENV%" or path name in deploy_variables.bat is wrong.
+    exit /b 2
+  )
 )
 
 @REM Clean folder structure
@@ -27,25 +30,45 @@ SET WORKDIR=%~dp0
   @REM Clean Unity Engine Support
   cd Core\Framework\EngineSupport\Unity
   call .\clean.bat
-  
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %WORKDIR%
+    exit /b %ERRORLEVEL%
+  )
+
   cd %WORKDIR%
   
   @REM Clean Adapters
   cd Core\Framework\LanguageSupport\cs
   call .\clean.bat
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %WORKDIR%
+    exit /b %ERRORLEVEL%
+  )
   
   cd %WORKDIR%
   
   @REM Clean Launcher
   cd Core\Launcher
   call .\clean.bat
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %WORKDIR%
+    exit /b %ERRORLEVEL%
+  )
   
   cd %WORKDIR%
   
   @REM Clean MMUs
   cd Core\BasicMMus\CS-MMUs\CS
   call  .\clean.bat
-  
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %WORKDIR%
+    exit /b %ERRORLEVEL%
+  )
+
   cd %WORKDIR%
 
 @REM Remove core artifacts from services
@@ -57,34 +80,64 @@ if EXIST Services\MMICSharp (
   @REM Clean BlenderIK Service
   cd .\Services\BlenderIK
   call clean.bat
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %WORKDIR%
+    exit /b %ERRORLEVEL%
+  )
   
   cd %WORKDIR%
 
   @REM Clean CoordinateSystemMapper
   cd .\Services\CoordinateSystemMapper
   call .\clean.bat
-
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %WORKDIR%
+    exit /b %ERRORLEVEL%
+  )
+  
   cd %WORKDIR%
 
   @REM Clean PostureBlendingService
   cd .\Services\PostureBlendingService
   call .\clean.bat
-
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %WORKDIR%
+    exit /b %ERRORLEVEL%
+  )
+  
   cd %WORKDIR%
 
   @REM Clean RetargetingService
   cd .\Services\RetargetingService
   call .\clean.bat
-
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %WORKDIR%
+    exit /b %ERRORLEVEL%
+  )
+  
   cd %WORKDIR%
 
   @REM Clean unityPathPlanning
   cd .\Services\UnityPathPlanning
   call .\clean.bat
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %WORKDIR%
+    exit /b %ERRORLEVEL%
+  )
   
   cd %WORKDIR%
   cd .\Core
   call .\remove_unity.bat
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %WORKDIR%
+    exit /b %ERRORLEVEL%
+  )
   
   cd %WORKDIR%
 
