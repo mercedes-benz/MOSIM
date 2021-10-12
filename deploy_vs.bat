@@ -22,7 +22,19 @@ if not defined DEVENV (
     ECHO Visual Studio does not seem to be installed at "%DEVENV%" or path name in deploy_variables.bat is wrong.
     exit /b 2
   )
-
+)
+if not defined MSBUILD (
+  ECHO [31mMSBUILD Environment variable pointing to the Visual Studio 2017 MSBuild.exe is missing.[0m
+  ECHO    e.g. "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"
+  pause
+  exit /b 1
+) else (
+  if not exist "%MSBUILD%" (
+    ECHO    MSBUILD: [31mMISSING[0m at "%MSBUILD%"
+    ECHO [31mPlease update the deploy_variables.bat script with a valid path![0m
+	exit /b 2
+    )
+  )
 )
 
 IF EXIST build (
@@ -124,6 +136,23 @@ REM Build Services
     md .\build\Environment\Services\RetargetingService
     cmd /c xcopy /S/Y/Q .\Services\RetargetingService\build\* .\build\Environment\Services\RetargetingService
     if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
+	
+  cd .\Services\SkeletonAccessService\
+	  call .\deploy.bat 
+	  if %ERRORLEVEL% NEQ 0 cd %WORKDIR% && exit /b %ERRORLEVEL%
+	  cd %WORKDIR%
+	  md .\build\Environment\Services\SkeletonAccessService
+	  cmd /c xcopy /S/Y/Q .\Services\SkeletonAccessService\build\* .\build\Environment\Services\SkeletonAccessService
+	  if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
+	  
+  cd .\Core\CoSimulation\
+	call .\deploy.bat
+	if %ERRORLEVEL% NEQ 0 cd %WORKDIR% && exit /b %ERRORLEVEL%
+	cd %WORKDIR%
+	md .\build\Environment\Services\CoSimulationStandalone
+	cmd /c xcopy /S/Y/Q .\Core\CoSimulation\CoSimulationStandalone\build\* .\build\Environment\Services\CoSimulationStandalone
+	if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
+
 
 COPY Scripts\enableFirewall.exe .\build\
 COPY Scripts\defaultSettings.json .\build\Environment\Launcher\settings.json
