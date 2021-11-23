@@ -24,7 +24,6 @@ IF EXIST build (
   RD /S/Q build
 )
 
-SET WORKDIR=%~dp0
 @REM Core
 
   @REM Clean Unity Engine Support
@@ -32,44 +31,44 @@ SET WORKDIR=%~dp0
   call .\clean.bat
   if %ERRORLEVEL% NEQ 0 (
     ECHO [31mThere has been an error during cleanup! [0m
-    cd %WORKDIR%
+    cd %MOSIM_HOME%
     exit /b %ERRORLEVEL%
   )
 
-  cd %WORKDIR%
+  cd %MOSIM_HOME%
   
   @REM Clean Adapters
   cd Core\Framework\LanguageSupport\cs
   call .\clean.bat
   if %ERRORLEVEL% NEQ 0 (
     ECHO [31mThere has been an error during cleanup! [0m
-    cd %WORKDIR%
+    cd %MOSIM_HOME%
     exit /b %ERRORLEVEL%
   )
   
-  cd %WORKDIR%
+  cd %MOSIM_HOME%
   
   @REM Clean Launcher
   cd Core\Launcher
   call .\clean.bat
   if %ERRORLEVEL% NEQ 0 (
     ECHO [31mThere has been an error during cleanup! [0m
-    cd %WORKDIR%
+    cd %MOSIM_HOME%
     exit /b %ERRORLEVEL%
   )
   
-  cd %WORKDIR%
+  cd %MOSIM_HOME%
   
   @REM Clean MMUs
   cd Core\BasicMMus\CS-MMUs\CS
   call  .\clean.bat
   if %ERRORLEVEL% NEQ 0 (
     ECHO [31mThere has been an error during cleanup! [0m
-    cd %WORKDIR%
+    cd %MOSIM_HOME%
     exit /b %ERRORLEVEL%
   )
 
-  cd %WORKDIR%
+  cd %MOSIM_HOME%
 
 @REM Remove core artifacts from services
 if EXIST Services\MMICSharp (
@@ -82,64 +81,79 @@ if EXIST Services\MMICSharp (
   call clean.bat
   if %ERRORLEVEL% NEQ 0 (
     ECHO [31mThere has been an error during cleanup! [0m
-    cd %WORKDIR%
+    cd %MOSIM_HOME%
     exit /b %ERRORLEVEL%
   )
   
-  cd %WORKDIR%
+  cd %MOSIM_HOME%
 
   @REM Clean CoordinateSystemMapper
   cd .\Services\CoordinateSystemMapper
   call .\clean.bat
   if %ERRORLEVEL% NEQ 0 (
     ECHO [31mThere has been an error during cleanup! [0m
-    cd %WORKDIR%
+    cd %MOSIM_HOME%
     exit /b %ERRORLEVEL%
   )
   
-  cd %WORKDIR%
+  cd %MOSIM_HOME%
 
   @REM Clean PostureBlendingService
   cd .\Services\PostureBlendingService
   call .\clean.bat
   if %ERRORLEVEL% NEQ 0 (
     ECHO [31mThere has been an error during cleanup! [0m
-    cd %WORKDIR%
+    cd %MOSIM_HOME%
     exit /b %ERRORLEVEL%
   )
   
-  cd %WORKDIR%
+  cd %MOSIM_HOME%
 
   @REM Clean RetargetingService
   cd .\Services\RetargetingService
   call .\clean.bat
   if %ERRORLEVEL% NEQ 0 (
     ECHO [31mThere has been an error during cleanup! [0m
-    cd %WORKDIR%
+    cd %MOSIM_HOME%
     exit /b %ERRORLEVEL%
   )
   
-  cd %WORKDIR%
+  cd %MOSIM_HOME%
+  
+  @REM Clean SkeletonAccessService
+  cd .\Services\SkeletonAccessService
+  call .\clean.bat
+  if %ERRORLEVEL% NEQ 0 (
+    ECHO [31mThere has been an error during cleanup! [0m
+    cd %MOSIM_HOME%
+    exit /b %ERRORLEVEL%
+  )
+  
+  cd %MOSIM_HOME%
+
 
   @REM Clean unityPathPlanning
   cd .\Services\UnityPathPlanning
   call .\clean.bat
   if %ERRORLEVEL% NEQ 0 (
     ECHO [31mThere has been an error during cleanup! [0m
-    cd %WORKDIR%
+    cd %MOSIM_HOME%
     exit /b %ERRORLEVEL%
   )
   
-  cd %WORKDIR%
+  cd %MOSIM_HOME%
+  
+  @REM Clean Unity
+  echo Starting Unity cleaning
   cd .\Core
   call .\remove_unity.bat
   if %ERRORLEVEL% NEQ 0 (
     ECHO [31mThere has been an error during cleanup! [0m
-    cd %WORKDIR%
+    cd %MOSIM_HOME%
     exit /b %ERRORLEVEL%
   )
   
-  cd %WORKDIR%
+  cd %MOSIM_HOME%
 
 
 ECHO [92mSuccessfully cleaned the Framework to the initiate the deployment process. Run deploy.bat script to start deployment process [0m

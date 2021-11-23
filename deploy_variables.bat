@@ -6,10 +6,10 @@ REM Original author(s): Janis Sprenger, Bhuvaneshwaran Ilanthirayan
 
 SET MOSIM_HOME=%~dp0
 
-SET "DEVENV=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com"
-SET "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-SET "UNITY2018_4_1=C:\Program Files\Unity\Hub\Editor\2019.4.20f1\Editor\Unity.exe"
-SET "UNITY2019_18_1=C:\Program Files\Unity\Hub\Editor\2019.4.20f1\Editor\Unity.exe"
+SET "DEVENV=C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\devenv.com"
+SET "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"
+SET "UNITY2018_4_1=C:\Program Files\Unity\Hub\Editor\2019.4.28f1\Editor\Unity.exe"
+SET "UNITY2019_18_1=C:\Program Files\Unity\Hub\Editor\2019.4.28f1\Editor\Unity.exe"
 
 ECHO The following environment variables are utilized:
 if exist "%DEVENV%" (
