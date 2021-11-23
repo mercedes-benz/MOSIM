@@ -1,4 +1,4 @@
-REM @echo off
+@echo off
 
 REM SPDX-License-Identifier: MIT
 REM The content of this file has been developed in the context of the MOSIM research project.
@@ -7,43 +7,63 @@ REM This is a deploy script to auto-generate the framework, including launcher, 
 
 call deploy_variables.bat
 if %ERRORLEVEL% NEQ 0 (
-  ECHO [31mThere has been an error during deployment! [0m
+  ECHO [31mThere has been an error when setting the deploy vaiables! [0m
   exit /b %ERRORLEVEL%
 )
 
-REM Distribute Unity dlls if the environment variable is set for mixed artefacts (e.g. MMUs). 
-set unity=F
+call Scripts/deploy/init.bat
 
-if defined UNITY2018_4_1 if exist "%UNITY2018_4_1%" set unity=T
-if defined UNITY2019_18_1 if exist "%UNITY2019_18_1%" set unity=T
+echo %ERRORLEVEL%
 
-if "%unity%"=="T" (
-  cd Core
-  call .\distribute_unity.bat
-  cd ..
-  if %ERRORLEVEL% NEQ 0 (
-    ECHO [31mThere has been an error during deployment! [0m
-    exit /b %ERRORLEVEL%
-  )
-)
-
-call .\deploy_vs.bat
 if %ERRORLEVEL% NEQ 0 (
-  ECHO [31mThere has been an error during deployment! [0m
+  ECHO [31mThere has been an error during initialization! [0m
   exit /b %ERRORLEVEL%
 )
 
-call .\deploy_unity.bat
+echo deploying core started ...
+
+call Scripts\deploy\deploy_core.bat
+
+echo deploying core done
+
 if %ERRORLEVEL% NEQ 0 (
-  ECHO [31mThere has been an error during deployment! [0m
+  ECHO "[31mThere has been an error during deployment of Framework Core. [0m"
   exit /b %ERRORLEVEL%
 )
+
+echo deploying mmus started ...
+
+call Scripts\deploy\deploy_mmus.bat
+
+echo deploying mmus done
+
+if %ERRORLEVEL% NEQ 0 (
+  ECHO "[31mThere has been an error during deployment (mmus). [0m"
+  exit /b %ERRORLEVEL%
+)
+
+echo deploying unity started ...
+
+call Scripts\deploy\deploy_unity.bat
+
+echo deploying unity done
+echo deploying services started ...
+
+call Scripts\deploy\deploy_services.bat
+
+echo deploying services done
+echo copying scripts started ...
+
+COPY Scripts\enableFirewall.exe .\build\
+COPY Scripts\defaultSettings.json .\build\Environment\Launcher\settings.json
+
+echo copying scripts done
+
+echo Removing doublicated MMUs
 
 call .\remove_double_mmus.bat
-if %ERRORLEVEL% NEQ 0 (
-  ECHO [31mThere has been an error during deployment! [0m
-  exit /b %ERRORLEVEL%
-)
+
+echo Removing doublicated MMUs done.
 
 REM the link currently does not yet work. 
 REM RD build\
