@@ -84,3 +84,5 @@ REM Copy core artifacts to Tools
 ECHO [92mSuccessfully deployed Unity Dependencies of the Framework to the build folder. [0m
 
 REM pause
+
+exit /b 0

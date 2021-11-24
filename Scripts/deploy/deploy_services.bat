@@ -79,3 +79,5 @@ REM deploy SkeletonAccessService
   md .\build\Environment\Services\SkeletonAccessService
   cmd /c xcopy /S/Y/Q .\Services\SkeletonAccessService\build\* .\build\Environment\Services\SkeletonAccessService
   if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
+  
+  exit /b 0

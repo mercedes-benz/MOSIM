@@ -39,3 +39,5 @@ REM Core
   md .\build\Environment\Services\CoSimulationStandalone
   cmd /c xcopy /S/Y/Q .\Core\CoSimulation\CoSimulationStandalone\build\* .\build\Environment\Services\CoSimulationStandalone
   if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
+  
+  exit /b 0

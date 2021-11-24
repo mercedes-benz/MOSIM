@@ -17,3 +17,5 @@ REM Build MMUs
 
   cmd /c xcopy /S/Y/Q .\Core\BasicMMus\CS-MMUs\CS\build\* build\Environment\MMUs\
   if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
+
+exit /b 0

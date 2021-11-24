@@ -13,3 +13,5 @@ RMDIR /s/q %basepath%\\MoveMMU
 RMDIR /s/q %basepath%\\MoveMMUSimple
 RMDIR /s/q %basepath%\\ReachMMU
 RMDIR /s/q %basepath%\\ReleaseMMU
+
+exit /b 0

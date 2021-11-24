@@ -64,3 +64,5 @@ md build\Environment\Adapters
 md build\Environment\Services
 md build\Environment\MMUs
 md build\Environment\Launcher
+
+exit /b 0
