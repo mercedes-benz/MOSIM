@@ -5,14 +5,24 @@ REM The content of this file has been developed in the context of the MOSIM rese
 REM Original author(s): Janis Sprenger, Bhuvaneshwaran Ilanthirayan, Klaus Fischer
 REM This is a deploy script to auto-generate the framework, including launcher, mmus, services and adapters. 
 
+REM set filepath="Core\Framework\EngineSupport\Unity\MMIUnity.sln"
+REM for /F "delims=" %%i in (%filepath%) do set dirname="%%~dpi" 
+REM for /F "delims=" %%i in (%filepath%) do set filename="%%~nxi"
+REM for /F "delims=" %%i in (%filepath%) do set basename="%%~ni"
+
 SET MOSIM_HOME=%~dp0
-SET BUILDENV=build\Environment
+SET BUILDENV=%MOSIM_HOME%\build\Environment
+SET LIBRARYPATH=%MOSIM_HOME%\build\Libraries
 
 call :argparse %*
 
 call :safeCall deploy_variables.bat "There has been an error when setting the deploy vaiables!"
 
 call :DeployMethod randomService
+
+if not exist %BUILDENV% (
+  md %BUILDENV%
+)
 
 if "%DPL_CORE%"=="T" call :DeployCore
 if "%DPL_MMU%"=="T" call :DeployMMUs
@@ -96,9 +106,19 @@ exit /b 0
 
 ::DeployCore
 :DeployCore
-	call :DeployMethod Core\Framework\LanguageSupport\cs Adapters\CSharpAdapter MMIAdapterCSharp\build
-	call :DeployMethod Core\Launcher Launcher build
-	call :DeployMethod Core\CoSimulation Services\CoSimulationStandalone CoSimulationStandalone\build
+	call :MSBUILD "Core\Framework\LanguageSupport\cs\MMICSharp.sln" MMIAdapterCSharp\bin Adapters\CSharpAdapter
+	call :MSBUILD "Core\Launcher\MMILauncher.sln" MMILauncher\bin Launcher
+	call :MSBUILD "Core\CoSimulation\MMICoSimulation.sln" CoSimulationStandalone\bin Services\CoSimulationStandalone 
+	
+	if not exist %LIBRARYPATH% (
+		md %LIBRARYPATH%
+	)
+	>>deploy.log (
+		cmd /c xcopy /S/Y/Q .\Core\Framework\LanguageSupport\cs\MMICSharp\bin\Debug\MMICSharp.dll %LIBRARYPATH%
+		cmd /c xcopy /S/Y/Q .\Core\Framework\LanguageSupport\cs\MMICSharp\bin\Debug\MMIStandard.dll %LIBRARYPATH%
+		cmd /c xcopy /S/Y/Q .\Core\Framework\LanguageSupport\cs\MMICSharp\bin\Debug\MMICSharp.dll %LIBRARYPATH%
+		cmd /c xcopy /S/Y/Q .\Core\CoSimulation\MMICoSimulation\bin\Debug\MMICoSimulation.dll %LIBRARYPATH%
+	)
 exit /b
 
 :DeployMMUs
@@ -143,12 +163,6 @@ exit /b
 	call :DeployMethod Services\SkeletonAccessService Services\SkeletonAccessService build
 exit /b
 
-:test 
-if not [%1]==[] (
-	Echo "set"
-	pause
-)
-exit /b
 
 ::DeployMethod 
 ::  %1 path to component
@@ -170,6 +184,55 @@ exit /b
 	ECHO [31m Path %1 does not exist and thus will not be deployed.[0m
 	ECHO -----------
   )
+exit /b
+
+::MSBUILD
+:MSBUILD
+  for /F "delims=" %%i in (%1) do set dirname="%%~dpi"
+  for /F "delims=" %%i in (%1) do set filename="%%~nxi"
+  
+  set mode=Debug
+  SETLOCAL EnableDelayedExpansion 
+ 
+  if exist %dirname% (
+	cd %dirname%
+		
+	>deploy.log (
+		"%MSBUILD%" %filename% -t:Build -p:Configuration=%mode% -flp:logfile=build.log
+	)
+	REM If the build was sucessfull, copy all files to the respective build folders. 
+
+	if !ERRORLEVEL! EQU 0 (
+			:msbuild_loop
+			if not [%2]==[] (
+				>>deploy.log (
+					cmd /c xcopy /S/Y/Q ".\%2\%mode%\*" "%BUILDENV%\%3"
+				)
+			)
+			if not [%4]==[] (
+				>>deploy.log (
+					cmd /c xcopy /S/Y/Q ".\%4\%mode%\*" "%BUILDENV%\%5"
+				)
+			)
+			if not [%6]==[] (
+				>>deploy.log (
+					cmd /c xcopy /S/Y/Q ".\%6\%mode%\*" "%BUILDENV%\%7"
+				)
+			)
+			
+		ECHO [92mSuccessfully deployed %filename%. [0m
+	) else (
+		type deploy.log 
+		ECHO [31mDeployment of %filename% failed. Please consider the build.log for more information.[0m 
+		cd %MOSIM_HOME%
+		call :halt %ERRORLEVEL%
+	)
+  ) else (
+    ECHO -----------
+	ECHO [31m Path %1 does not exist and thus will not be deployed.[0m
+	ECHO -----------
+  )
+cd %MOSIM_HOME%
 exit /b
 
 :: Calls a method %1 and checks the error level. If %1 failed, text %2 will be reported. 
