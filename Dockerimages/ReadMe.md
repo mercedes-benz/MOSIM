@@ -1,3 +1,5 @@
+If you are not familiar with Docker, please visit www.docker.com/get-started .
+
 The Docker images for all components of the MOSIM Framework are available at: hub.docker.com
 
 You can ues PullImages.bat to download the images to your local machine.
@@ -5,7 +7,7 @@ You can ues PullImages.bat to download the images to your local machine.
 We recommend to pull the images before you try to start them using StartImages.bat because (depending on the download speed) the pause times in the start script might be too short which could make some images fail to connect to the launcher image.
 
 Please make sure that you set the environment variable MOSIM_IPA to the IP address of the machine on which you want to run the framework.
-Therefore, please use Windows command line window for this rather than PowerShell.
+Please note: Please use Windows command line window for this rather than PowerShell.
 We recommend to use the Windows Terminal App beccause it allows to easily switch between these two.
 
 Please make sure that you also set the IP address in Unity in Scene and Avatar in the MMI plugins to the IP address of the machine where you have the framework running.
@@ -36,3 +38,4 @@ RemoveContainers.bat:
 RemoveImages.bat:
 	Removes all images.
 	Please note: This removes all images on the machine not just the MOSIm images!
+	
