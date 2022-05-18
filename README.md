@@ -1,4 +1,5 @@
 # :warning: This project is no longer maintained and is archived.
+# MOSIM is now maintained at [this location](https://github.com/dfki-asr/MOSIM).
 
 # MOSIM Meta
 
